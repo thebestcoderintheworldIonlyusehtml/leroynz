@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="Leroy.nz" />
-<link rel="manifest" href="/site.webmanifest" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Leroy</title>
+
+  <!-- Favicons (you already have these) -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Leroy.nz" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Font Awesome for link icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-p9+PvQBO1FF9yYjghsO4MRoO0hKYzELt+/cU3f4QeVj0lF5/IrSWZ/qXzqEpDd7j2LeMheHXQ2idal4h06PoeQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
   <style>
     /* reset margins, prevent scrollbars */
     html, body {
@@ -27,19 +39,112 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      z-index: -1;             /* sit behind any other content */
+      z-index: -1; /* sit behind everything */
+    }
+
+    /* ─── Discord-style card ─── */
+    .discord-card {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 256px;
+      height: 256px;
+      background: #36393f;
+      border-radius: 8px;
+      padding: 16px;
+      box-sizing: border-box;
+      color: #dcddde;
+      font-family: "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+      z-index: 1; /* sit above video */
+    }
+    .discord-card .avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 12px;
+      border: 2px solid #202225;
+    }
+    .discord-card .username {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .discord-card .links {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      overflow-y: auto;
+      padding-right: 4px; /* for scrollbar */
+    }
+    .discord-card .link-item {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #b9bbbe;
+      padding: 6px 8px;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .discord-card .link-item i {
+      margin-right: 8px;
+      font-size: 0.9rem;
+      width: 16px;
+      text-align: center;
+    }
+    .discord-card .link-item span {
+      font-size: 0.85rem;
+    }
+    .discord-card .link-item:hover {
+      background: #4f545c;
     }
   </style>
 </head>
 <body>
 
+  <!-- Your full-screen video -->
   <video id="bg" autoplay muted loop playsinline>
-    <!-- Use MP4 for broad support; add WebM fallback if you want -->
     <source src="money.mp4" type="video/mp4">
-    <!-- optional poster image while loading -->
-    <!-- <img src="images/poster.jpg" alt="Your browser doesn’t support video."> -->
   </video>
+
+  <!-- ─── Discord-style profile card ─── -->
+  <div class="discord-card">
+    <!-- Replace with your own avatar URL -->
+    <img class="avatar" src="https://via.placeholder.com/64" alt="Avatar">
+    <!-- Replace with your own Discord tag -->
+    <div class="username">YourName#1234</div>
+    <!-- JS will inject your links here -->
+    <div class="links" id="links"></div>
+  </div>
+
+  <script>
+    // ===== CUSTOMIZE THIS =====
+    const links = [
+      { name: 'Twitter', url: 'https://twitter.com/your_handle',     iconClass: 'fab fa-twitter' },
+      { name: 'GitHub',  url: 'https://github.com/your_username',    iconClass: 'fab fa-github'  },
+      { name: 'Website', url: 'https://yourdomain.com',              iconClass: 'fas fa-globe'    },
+      { name: 'Discord', url: 'https://discord.gg/your_invite_code', iconClass: 'fab fa-discord' },
+      // add or remove entries as you wish
+    ];
+
+    const container = document.getElementById('links');
+    links.forEach(link => {
+      const a = document.createElement('a');
+      a.href = link.url;
+      a.target = '_blank';
+      a.className = 'link-item';
+      a.innerHTML = `<i class="${link.iconClass}"></i><span>${link.name}</span>`;
+      container.appendChild(a);
+    });
+  </script>
 
 </body>
 </html>
-
