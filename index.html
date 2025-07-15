@@ -125,26 +125,37 @@
     <div class="links" id="links"></div>
   </div>
 
-  <script>
-    // ===== CUSTOMIZE THIS =====
-    const links = [
-      { name: 'Twitter', url: 'https://twitter.com/your_handle',     iconClass: 'fab fa-twitter' },
-      { name: 'GitHub',  url: 'https://github.com/your_username',    iconSrc: 'github.png'  },
-      { name: 'Website', url: 'https://yourdomain.com',              iconClass: 'fas fa-globe'    },
-      { name: 'Discord', url: 'https://discord.gg/your_invite_code', iconClass: 'fab fa-discord' },
-      // add or remove entries as you wish
-    ];
 
-    const container = document.getElementById('links');
-    links.forEach(link => {
-      const a = document.createElement('a');
-      a.href = link.url;
-      a.target = '_blank';
-      a.className = 'link-item';
-      a.innerHTML = `<i class="${link.iconClass}"></i><span>${link.name}</span>`;
-      container.appendChild(a);
-    });
-  </script>
+<script>
+  const links = [
+    {
+      name: 'GitHub',
+      url:  'https://github.com/your_username',
+      iconSrc: 'github.png'      // your GitHub image
+    },
+    {
+      name: 'Discord',
+      url:  'https://discord.gg/your_invite_code',
+      iconSrc: 'discord.png'     // your Discord image
+    },
+    // …other links as you like
+  ];
+
+  const container = document.getElementById('links');
+  links.forEach(link => {
+    const a = document.createElement('a');
+    a.href = link.url;
+    a.target = '_blank';
+    a.className = 'link-item';
+    a.innerHTML = `
+      <img src="${link.iconSrc}" alt="${link.name}" class="link-img">
+      <span>${link.name}</span>
+    `;
+    container.appendChild(a);
+  });
+</script>
+
+ 
 
 </body>
 </html>
