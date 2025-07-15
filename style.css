@@ -1,7 +1,7 @@
 .discord-card .link-item img {
-  width: 16px;
-  height: 16px;
-  margin-right: 40px;
+  width: 160px;
+  height: 160px;
+  margin-right: 8px;
   display: inline-block;
   vertical-align: middle;
 }
