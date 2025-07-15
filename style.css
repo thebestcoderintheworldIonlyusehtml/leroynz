@@ -1,13 +1,8 @@
-.discord-card .link-item span {
-  font-size: 0.85rem;
-  padding-left: 12px;  /* add extra space before the text */
-}
-
 
 .discord-card .link-item img {
-  width: 160px;
-  height: 160px;
-  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+  margin-right: 16px;
   display: inline-block;
   vertical-align: middle;
 }
