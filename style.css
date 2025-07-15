@@ -6,3 +6,20 @@
   vertical-align: middle;
 }
 
+  /* hide the built‑in audio controls */
+  audio#background-audio {
+    display: none;
+  }
+
+  /* style the toggle button */
+  #audio-toggle {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    margin-top: 8px;
+    color: #b9bbbe;
+  }
+  #audio-toggle.playing {
+    color: #43b581;  /* Discord-green when playing */
+  }
