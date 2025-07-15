@@ -15,3 +15,11 @@ toggleBtn.addEventListener("click", () => {
     toggleBtn.textContent = "Go Online";
   }
 });
+
+
+    window.addEventListener('load', function () {
+      const audio = new Audio('o.mp3'); // Replace with your actual MP3 file path
+      audio.play().catch(function(error) {
+        console.log('Playback failed:', error);
+      });
+    });
