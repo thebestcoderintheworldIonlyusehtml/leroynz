@@ -2,184 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Leroy</title>
-
-  <!-- Favicons -->
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Leroy.nz" />
-  <link rel="manifest" href="/site.webmanifest" />
-
-  <!-- Font Awesome (if you prefer icons over emoji) -->
-  <script src="https://kit.fontawesome.com/YOUR_KIT_ID.js" crossorigin="anonymous"></script>
-
-  <style>
-    /* reset margins, prevent scrollbars */
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-    }
-
-    /* make the video fill the viewport */
-    video#bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -1;
-    }
-
-    /* hide the built‑in audio controls */
-    audio#background-audio {
-      display: none;
-    }
-
-    /* ─── Discord-style card ─── */
-    .discord-card {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 256px;
-      background: #36393f;
-      border-radius: 8px;
-      padding: 16px;
-      box-sizing: border-box;
-      color: #dcddde;
-      font-family: "Segoe UI", Roboto, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-      z-index: 1;
-    }
-    .discord-card .avatar {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 12px;
-      border: 2px solid #202225;
-    }
-    .discord-card .username {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 12px;
-      text-align: center;
-    }
-    .discord-card .links {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      overflow-y: auto;
-      padding-right: 4px;
-      margin-bottom: 12px;
-    }
-    .discord-card .link-item {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      color: #b9bbbe;
-      padding: 6px 8px;
-      border-radius: 4px;
-      transition: background 0.2s;
-    }
-    .discord-card .link-item img {
-      width: 16px;
-      height: 16px;
-      margin-right: 12px;
-    }
-    .discord-card .link-item:hover {
-      background: #4f545c;
-    }
-
-    /* audio toggle button */
-    #audio-toggle {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #b9bbbe;
-      padding: 4px;
-    }
-    #audio-toggle.playing {
-      color: #43b581;  /* Discord‑green when playing */
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--#PUT YOUR NAME BETWEEN THE >< IN THE TITLE SECTION-->
+  <title></title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" 
+        integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM1fChH5j8TR8h2vZ2qHkq/sX5r/Xj4Zj8LQ7Y" crossorigin="anonymous">
 </head>
 <body>
-
-  <!-- full-screen video -->
-  <video id="bg" autoplay muted loop playsinline>
-    <source src="money.mp4" type="video/mp4">
-  </video>
-
-  <!-- background audio (looping) -->
+  <div class="overlay" id="overlay">
+    <h2>Click to Enter...</h2>
+  </div>
+<!-- put your mp4 in the source src =""-->
+  <video id="background-video" muted loop class="video-background">
+    <source src="" type="video/mp4">
+  </video> 
+<!--put your audio file in the source src=""-->
   <audio id="background-audio" loop>
-    <source src="lil.mp3" type="audio/mpeg">
-    <!-- fallback text -->
-    Your browser doesn’t support background audio.
+    <source src="">
   </audio>
-
-  <!-- Discord-style profile card -->
-  <div class="discord-card">
-    <img class="avatar" src="favicon-96x96.png" alt="Avatar">
-    <div class="username">Leroy</div>
-    <div class="links" id="links"></div>
-
-    <!-- audio toggle -->
-    <button id="audio-toggle" aria-label="Toggle background audio">🔊</button>
+  
+  <div class="audio-control" id="audioControl">
+    <div class="mute-button" id="muteButton">🔊</div>
+    <input type="range" id="volumeSlider" value="100" max="100">
+  </div>
+<!-- PUT YOUR PHOTO FILE IN "" SECTION BY IMG SRC-->
+  <div class="container">
+    <img src="" alt="Profile Picture" class="profile-pic">
+    <h1>Ayoub <span class="check-icon">✩</span></h1>
+    <div id="typewriter"></div>
+  </div>
+<!-- chang the icon.jpg to ur own photo for the icons change all three of them-->
+  <div class="icon-container">
+    <a href="toekomstige baan.html" target="_blank">
+        <img src="icon.jpg" alt="Home" class="icon-image">
+    </a>
+    <a href="page2.html"target="_blank">
+        <img src="icon2.jpg" alt="User" class="icon-image">
+    </a>
+    <a href="page3.html"target="_blank">
+        <img src="ICON3.jpg" alt="Settings" class="icon-image">
+    </a>
+  </div>
+<body> 
+  <div class="view-counter">
+    <i class="fas fa-eye"></i>
+    <span id="viewCount">0</span>
+    <div class="eye" id="eye">👀</div>
   </div>
 
-  <script>
-    // Inject your links
-    const links = [
-      { name: 'GitHub',  url: 'https://github.com/your_username',     iconSrc: 'github.png' },
-      { name: 'Discord', url: 'https://discord.gg/your_invite_code',   iconSrc: 'discord.png' },
-      { name: 'TikTok', url: 'https://discord.gg/your_invite_code',   iconSrc: 'tiktok.png' },
-      // add more…
-    ];
-    const container = document.getElementById('links');
-    links.forEach(link => {
-      const a = document.createElement('a');
-      a.href = link.url;
-      a.target = '_blank';
-      a.className = 'link-item';
-      a.innerHTML = 
-        <img src="${link.iconSrc}" alt="${link.name}">
-        <span>${link.name}</span>
-      ;
-      container.appendChild(a);
-    });
+  <script src="script.js"></script> 
+ 
 
-    // Audio play/pause logic
-    const bgAudio = document.getElementById('background-audio');
-    const toggle  = document.getElementById('audio-toggle');
+</body>
+  <div class="view-counter">
+    <i class="fas fa-eye"></i>
+    <span id="viewCount">0</span>
+    <div class="eye" id="eye">👀</div>
+  </div>
 
-    // Unlock audio on first user interaction
-    document.body.addEventListener('click', () => {
-      bgAudio.play().catch(() => {});
-    }, { once: true });
-
-    // Toggle button behavior
-    toggle.addEventListener('click', () => {
-      if (bgAudio.paused) {
-        bgAudio.play();
-        toggle.classList.add('playing');
-      } else {
-        bgAudio.pause();
-        toggle.classList.remove('playing');
-      }
-    });
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
