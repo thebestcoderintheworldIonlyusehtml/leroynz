@@ -1,6 +1,6 @@
 
 const app = document.getElementById('typewriter');
-const textArray = ["XADICA4E4A"];
+const textArray = ["LEEEEEEEEE"];
 let index = 0;
 
 function type() {
