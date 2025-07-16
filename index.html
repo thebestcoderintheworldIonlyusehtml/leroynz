@@ -13,162 +13,182 @@
   <meta name="apple-mobile-web-app-title" content="Leroy.nz" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <!-- Font Awesome (if you prefer icons over emoji) -->
+  <!-- Font Awesome (optional) -->
   <script src="https://kit.fontawesome.com/YOUR_KIT_ID.js" crossorigin="anonymous"></script>
 
   <style>
-    /* reset margins, prevent scrollbars */
+    /* ─── Reset & Layout ─── */
     html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
+      margin: 0; padding: 0;
+      height: 100%; overflow: hidden;
+      font-family: "Segoe UI", Roboto, sans-serif;
     }
 
-    /* make the video fill the viewport */
+    /* ─── Video & Audio ─── */
     video#bg {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -1;
+      top:0; left:0;
+      width:100%; height:100%;
+      object-fit:cover;
+      z-index:-2;
     }
-
-    /* hide the built‑in audio controls */
     audio#background-audio {
-      display: none;
+      display: none; /* hidden controls */
     }
 
-    /* ─── Discord-style card ─── */
+    /* ─── Entry Overlay ─── */
+    #entry-overlay {
+      position: fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: opacity 0.5s ease;
+    }
+    #entry-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #enter-btn {
+      background: #43b581;
+      border: none;
+      color: white;
+      padding: 1rem 2rem;
+      font-size: 1.25rem;
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    /* ─── Discord Card ─── */
     .discord-card {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 256px;
-      background: #36393f;
-      border-radius: 8px;
-      padding: 16px;
-      box-sizing: border-box;
-      color: #dcddde;
-      font-family: "Segoe UI", Roboto, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-      z-index: 1;
+      top:50%; left:50%;
+      transform: translate(-50%,-50%);
+      width:256px;
+      background:#36393f;
+      border-radius:8px;
+      padding:16px;
+      box-sizing:border-box;
+      color:#dcddde;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      box-shadow:0 4px 12px rgba(0,0,0,0.6);
+      z-index:1;
     }
     .discord-card .avatar {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 12px;
-      border: 2px solid #202225;
+      width:64px; height:64px;
+      border-radius:50%;
+      object-fit:cover;
+      margin-bottom:12px;
+      border:2px solid #202225;
     }
     .discord-card .username {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 12px;
-      text-align: center;
+      font-size:1rem;
+      font-weight:600;
+      margin-bottom:12px;
+      text-align:center;
     }
     .discord-card .links {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      overflow-y: auto;
-      padding-right: 4px;
-      margin-bottom: 12px;
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      overflow-y:auto;
+      padding-right:4px;
+      margin-bottom:12px;
     }
     .discord-card .link-item {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      color: #b9bbbe;
-      padding: 6px 8px;
-      border-radius: 4px;
-      transition: background 0.2s;
+      display:flex;
+      align-items:center;
+      text-decoration:none;
+      color:#b9bbbe;
+      padding:6px 8px;
+      border-radius:4px;
+      transition:background 0.2s;
     }
     .discord-card .link-item img {
-      width: 16px;
-      height: 16px;
-      margin-right: 12px;
+      width:16px; height:16px;
+      margin-right:12px;
     }
     .discord-card .link-item:hover {
-      background: #4f545c;
+      background:#4f545c;
     }
 
-    /* audio toggle button */
+    /* ─── Audio Toggle ─── */
     #audio-toggle {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #b9bbbe;
-      padding: 4px;
+      background:none;
+      border:none;
+      font-size:1.5rem;
+      cursor:pointer;
+      color:#b9bbbe;
+      padding:4px;
     }
     #audio-toggle.playing {
-      color: #43b581;  /* Discord‑green when playing */
+      color:#43b581;
     }
   </style>
 </head>
 <body>
 
-  <!-- full-screen video -->
+  <!-- Full-screen video -->
   <video id="bg" autoplay muted loop playsinline>
     <source src="money.mp4" type="video/mp4">
   </video>
 
-  <!-- background audio (looping) -->
-  <audio id="background-audio" loop>
+  <!-- Background audio -->
+  <audio id="background-audio" loop preload="auto">
     <source src="lil.mp3" type="audio/mpeg">
-    <!-- fallback text -->
     Your browser doesn’t support background audio.
   </audio>
 
-  <!-- Discord-style profile card -->
+  <!-- Entry overlay -->
+  <div id="entry-overlay">
+    <button id="enter-btn">Click to Enter</button>
+  </div>
+
+  <!-- Discord‑style profile card -->
   <div class="discord-card">
     <img class="avatar" src="favicon-96x96.png" alt="Avatar">
     <div class="username">Leroy</div>
     <div class="links" id="links"></div>
-
-    <!-- audio toggle -->
     <button id="audio-toggle" aria-label="Toggle background audio">🔊</button>
   </div>
 
   <script>
-    // Inject your links
+    const bgAudio = document.getElementById('background-audio');
+    const overlay = document.getElementById('entry-overlay');
+    const enterBtn = document.getElementById('enter-btn');
+    const toggle  = document.getElementById('audio-toggle');
+
+    // 1) Inject your links
     const links = [
-      { name: 'Tiktok',  url: 'https://www.tiktok.com/@leroy',     iconSrc: 'tiktok.png' },
-      { name: 'Discord', url: 'https://discord.gg/your_invite_code',   iconSrc: 'discord.png' },
-      // add more…
+      { name: 'Tiktok',  url: 'https://www.tiktok.com/@leroy',       iconSrc: 'tiktok.png' },
+      { name: 'Discord', url: 'https://discord.gg/your_invite_code', iconSrc: 'discord.png' },
+      // …more…
     ];
     const container = document.getElementById('links');
-    links.forEach(link => {
+    links.forEach(l => {
       const a = document.createElement('a');
-      a.href = link.url;
-      a.target = '_blank';
+      a.href = l.url; a.target = '_blank';
       a.className = 'link-item';
-      a.innerHTML = `
-        <img src="${link.iconSrc}" alt="${link.name}">
-        <span>${link.name}</span>
-      `;
+      a.innerHTML = `<img src="${l.iconSrc}" alt="${l.name}"><span>${l.name}</span>`;
       container.appendChild(a);
     });
 
-    // Audio play/pause logic
-    const bgAudio = document.getElementById('background-audio');
-    const toggle  = document.getElementById('audio-toggle');
+    // 2) “Click to Enter” workflow
+    enterBtn.addEventListener('click', () => {
+      bgAudio.play().catch(()=>{});
+      overlay.classList.add('hidden');
+      // optional: completely remove after fade
+      setTimeout(() => overlay.remove(), 600);
+    });
 
-    // Unlock audio on first user interaction
-    document.body.addEventListener('click', () => {
-      bgAudio.play().catch(() => {});
-    }, { once: true });
-
-    // Toggle button behavior
+    // 3) Audio toggle button
     toggle.addEventListener('click', () => {
       if (bgAudio.paused) {
         bgAudio.play();
